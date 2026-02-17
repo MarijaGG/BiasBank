@@ -34,6 +34,11 @@
         <input type="number" name="track_count" value="{{ old('track_count', $album->track_count) }}" min="0">
     </div>
 
+    <div>
+        <label>Title Track:</label>
+        <input type="text" name="title_track" value="{{ old('title_track', $album->title_track) }}">
+    </div>
+
     @if($album->image)
         <div>
             <p>Current Cover:</p>

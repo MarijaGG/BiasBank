@@ -28,6 +28,11 @@
     </div>
 
     <div>
+        <label>Title Track:</label>
+        <input type="text" name="title_track">
+    </div>
+
+    <div>
         <label>Album Cover Image:</label>
         <input type="file" name="image">
     </div>

@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function userPhotocards()
+    {
+        return $this->hasMany(UserPhotocard::class);
+    }
 }

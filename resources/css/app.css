@@ -1,3 +1,288 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+:root {
+	--bg: #0b1220;
+	--card: #0f1724;
+	--text: #e6eef8;
+	--muted: #9aa8b6;
+	--accent: #38bdf8;
+}
+
+body.dark {
+	background: var(--bg);
+	color: var(--text);
+}
+
+.app-container {
+	min-height: 100vh;
+}
+
+
+.card {
+	background: var(--card);
+	border-radius: 8px;
+	padding: 12px;
+	color: var(--text);
+	border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.sep {
+	border: none;
+	border-top: 1px solid rgba(255, 255, 255, 0.04);
+	margin: 24px 0;
+}
+
+.btn {
+	display: inline-block;
+	padding: 8px 12px;
+	background: transparent;
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	color: var(--text);
+	border-radius: 6px;
+}
+
+
+
+
+
+.img-cover {
+	object-fit: cover;
+	display: block;
+	margin: 0 auto;
+}
+
+.img-album {
+	width: 150px;
+	height: 150px;
+	border-radius: 10px;
+}
+
+.img-member {
+	width: 96px;
+	height: 96px;
+	border-radius: 8px;
+}
+
+.img-member-large {
+	width: 140px;
+	height: 140px;
+	border-radius: 10px;
+}
+
+.img-photocard {
+	width: 80px;
+	height: 104px;
+	border-radius: 6px;
+}
+
+
+
+
+.group-members {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin-top: 12px;
+}
+
+.member-card {
+	width: 110px;
+	text-align: center;
+	padding: 6px;
+	border-radius: 8px;
+	background: rgba(255, 255, 255, 0.02);
+	border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.member-name {
+	margin-top: 8px;
+	font-weight: 700;
+	font-size: 1.1rem;
+	color: var(--text);
+}
+
+.album-card {
+	width: 140px;
+	padding: 8px;
+	border-radius: 8px;
+	background: rgba(255, 255, 255, 0.02);
+	border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.album-title {
+	font-size: 1.25rem;
+	font-weight: 800;
+	color: var(--text);
+	margin-top: 10px;
+}
+
+.album-card .img-album {
+	width: 120px;
+	height: 120px;
+	object-fit: cover;
+	display: block;
+	margin: 0 auto;
+	border-radius: 8px;
+}
+
+
+
+
+.photocard-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-top: 8px;
+}
+
+.photocard-item {
+	width: 96px;
+	text-align: center;
+}
+
+.img-photocard {
+	width: 88px;
+	height: 112px;
+	border-radius: 6px;
+}
+
+
+.collection-item .img-photocard {
+	box-shadow: 0 6px 18px rgba(56, 189, 248, 0.12);
+	border-radius: 8px;
+}
+
+.collection-item:hover .img-photocard {
+	box-shadow: 0 10px 30px rgba(56, 189, 248, 0.18);
+	transform: translateY(-3px);
+}
+
+
+
+
+
+.large-title {
+	font-size: 2rem;
+	font-weight: 800;
+	color: var(--text);
+	margin-bottom: 8px;
+}
+
+.group-title {
+	font-size: 1.125rem;
+	font-weight: 600;
+}
+
+.small-muted {
+	color: var(--muted);
+	font-size: 0.9rem;
+}
+
+
+
+
+
+.grid-wrap {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+}
+
+.flex-gap {
+	display: flex;
+	gap: 12px;
+	align-items: flex-start;
+}
+
+.center {
+	text-align: center;
+}
+
+
+
+
+.collection-grid {
+	display: flex;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.collection-item {
+	width: 140px;
+	text-align: center;
+}
+
+.pc-owned {
+	font-size: 12px;
+	color: var(--text);
+	margin-top: 6px;
+}
+
+nav.bg-gray-900 a {
+	color: inherit;
+}
+
+.groups-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+	gap: 16px;
+}
+
+.group-card {
+	background: rgba(255, 255, 255, 0.02);
+	border: 1px solid rgba(255, 255, 255, 0.04);
+	padding: 18px;
+	height: 180px;
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	color: var(--text);
+	text-decoration: none;
+}
+
+.group-card strong {
+	font-size: 1.125rem;
+}
+
+.dark-select {
+	background: rgba(255, 255, 255, 0.02);
+	border: 1px solid rgba(255, 255, 255, 0.04);
+	color: var(--text);
+	padding: 10px;
+	border-radius: 6px;
+}
+
+.btn-dark {
+	display: inline-block;
+	padding: 8px 12px;
+	background: transparent;
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	color: var(--text);
+	border-radius: 6px;
+}
+
+.photocard-form input[type="text"],
+.photocard-form input[type="number"],
+.photocard-form input[type="email"],
+.photocard-form textarea,
+.photocard-form .dark-select,
+.photocard-form select {
+	background: rgba(255, 255, 255, 0.02);
+	border: 1px solid rgba(255, 255, 255, 0.04);
+	color: var(--text);
+	padding: 10px 36px 10px 12px;
+	border-radius: 6px;
+	width: 100%;
+	box-sizing: border-box;
+	font-size: 0.95rem;
+	line-height: 1.2;
+}
+
+
+
