@@ -34,6 +34,7 @@ class PublicPhotocardController extends Controller
             'photocard_id' => $photocard->id,
             'purchase_price' => $request->input('purchase_price'),
             'condition' => $request->input('condition'),
+            'status' => 'have',
         ]);
 
         $purchasePrice = $request->input('purchase_price');
@@ -47,5 +48,25 @@ class PublicPhotocardController extends Controller
         }
 
         return redirect()->route('dashboard')->with('status', 'Photocard added to your collection.');
+    }
+
+    public function want(Request $request, Photocard $photocard)
+    {
+        $user = $request->user();
+
+        // avoid duplicate wants/haves
+        $exists = UserPhotocard::where('user_id', $user->id)
+            ->where('photocard_id', $photocard->id)
+            ->exists();
+
+        if (!$exists) {
+            UserPhotocard::create([
+                'user_id' => $user->id,
+                'photocard_id' => $photocard->id,
+                'status' => 'want',
+            ]);
+        }
+
+        return back()->with('status', 'Added to your want list.');
     }
 }

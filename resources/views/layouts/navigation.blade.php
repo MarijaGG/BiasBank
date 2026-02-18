@@ -23,6 +23,15 @@
         {{ __('Albums') }}
     </x-nav-link>
 
+    <x-nav-link :href="route('albums.upcoming')" :active="request()->routeIs('albums.upcoming')">
+        {{ __('Upcoming Albums') }}
+    </x-nav-link>
+    @auth
+        <x-nav-link :href="route('collection.index')" :active="request()->routeIs('collection.*')">
+            {{ __('My collection') }}
+        </x-nav-link>
+    @endauth
+
     @if(Auth::user()->role === 'admin')
         <x-nav-link :href="route('admin.dashboard')" 
             :active="request()->routeIs('admin.*')">

@@ -284,5 +284,44 @@ nav.bg-gray-900 a {
 	line-height: 1.2;
 }
 
+/* Keep condition select and want button inline */
+.inline-row {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	align-items: stretch;
+}
+
+.inline-row form {
+	margin: 0;
+}
+
+.inline-row .dark-select {
+	flex: 1;
+	width: auto;
+}
+
+/* Actions container next to inputs: small horizontal gap */
+.inline-row .actions {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	margin-top: 8px;
+}
+
+.inline-row .actions form { margin: 0; }
+
+/* Make each form a column and align buttons to the bottom so both buttons line up */
+.inline-row form {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.inline-row form .btn,
+.inline-row form .btn-dark {
+	align-self: flex-start;
+}
+
 
 

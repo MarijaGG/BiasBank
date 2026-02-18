@@ -12,8 +12,8 @@
     </select>
 
     <select name="direction" class="dark-select" style="margin-left:10px">
-        <option value="asc" {{ request('direction') == 'asc' ? 'selected' : '' }}>Ascending</option>
-        <option value="desc" {{ request('direction') == 'desc' ? 'selected' : '' }}>Descending</option>
+        <option value="asc" {{ request('direction') == 'asc' ? 'selected' : '' }}>Asc</option>
+        <option value="desc" {{ request('direction') == 'desc' ? 'selected' : '' }}>Desc</option>
     </select>
 
     <button type="submit" class="btn-dark" style="margin-left:12px">Sort</button>

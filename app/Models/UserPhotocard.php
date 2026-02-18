@@ -11,6 +11,7 @@ class UserPhotocard extends Model
         'photocard_id',
         'purchase_price',
         'condition',
+        'status',
     ];
 
     public function user()

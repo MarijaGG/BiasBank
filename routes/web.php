@@ -47,10 +47,17 @@ require __DIR__.'/auth.php';
 Route::get('/groups', [GroupListController::class, 'index'])->name('groups.index');
 Route::get('/groups/{group}', [GroupListController::class, 'show'])->name('groups.show');
 Route::get('/albums', [PublicAlbumController::class, 'index'])->name('albums.index');
+Route::get('/albums/upcoming', [PublicAlbumController::class, 'upcoming'])->name('albums.upcoming');
 Route::get('/albums/{album}', [PublicAlbumController::class, 'show'])->name('albums.show');
 Route::get('/members/{member}', [PublicMemberController::class, 'show'])->name('members.show');
 Route::get('/photocards/{photocard}', [PublicPhotocardController::class, 'show'])->name('photocards.show');
 Route::post('/photocards/{photocard}/collect', [PublicPhotocardController::class, 'collect'])->middleware('auth')->name('photocards.collect');
+Route::post('/photocards/{photocard}/want', [PublicPhotocardController::class, 'want'])->middleware('auth')->name('photocards.want');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/collection', [\App\Http\Controllers\CollectionController::class, 'index'])->name('collection.index');
+    Route::delete('/collection/{userPhotocard}', [\App\Http\Controllers\CollectionController::class, 'destroy'])->name('collection.destroy');
+});
 
 
 Route::middleware(['auth', 'role:admin'])

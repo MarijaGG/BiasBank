@@ -3,7 +3,7 @@
 <h1 class="large-title">Albums</h1>
 
 <form method="GET" action="{{ route('albums.index') }}" class="flex-gap" style="margin-bottom:16px;align-items:center;">
-    <label class="small-muted" style="margin-right:8px">Sort:</label>
+    <label class="small-muted" style="margin-right:8px">Sort by:</label>
     <select name="sort" class="dark-select">
         <option value="name" {{ (isset($sort) && $sort==='name') ? 'selected' : '' }}>Name</option>
         <option value="release_date" {{ (isset($sort) && $sort==='release_date') ? 'selected' : '' }}>Release date</option>

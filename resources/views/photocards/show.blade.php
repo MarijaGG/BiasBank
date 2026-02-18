@@ -18,31 +18,45 @@
 
         @auth
             <hr class="sep">
-            <form method="POST" action="{{ route('photocards.collect', $photocard) }}" class="photocard-form">
-                @csrf
+            <div class="flex-gap" style="align-items:flex-start;">
+                <div class="inline-row">
+                    <form id="have-form" method="POST" action="{{ route('photocards.collect', $photocard) }}" class="photocard-form" style="min-width:240px;">
+                        @csrf
 
-                <div>
-                    <label class="block">Condition</label>
-                    <select name="condition" required class="border rounded px-2 py-1">
-                        <option value="Near Mint">Near Mint</option>
-                        <option value="Excellent">Excellent</option>
-                        <option value="Good">Good</option>
-                        <option value="Fair">Fair</option>
-                    </select>
-                </div>
+                        <div>
+                            <label class="block">Condition</label>
+                            <select name="condition" required class="dark-select">
+                                <option value="Near Mint">Near Mint</option>
+                                <option value="Excellent">Excellent</option>
+                                <option value="Good">Good</option>
+                                <option value="Fair">Fair</option>
+                            </select>
+                        </div>
 
-                <div style="margin-top:8px;">
-                    <label class="block">Purchase price (optional)</label>
-                    <input type="number" step="0.01" name="purchase_price" class="border rounded px-2 py-1">
+                        <div style="margin-top:8px;">
+                            <label class="block">Purchase price (optional)</label>
+                            <input type="number" step="0.01" name="purchase_price" placeholder="0.00" class="dark-select">
+                        </div>
+
+                    </form>
+
+                    <div class="actions" style="display:flex;gap:10px;align-items:flex-start;">
+                        <button type="button" onclick="document.getElementById('have-form').submit()" class="btn">Add to Have</button>
+
+                        <form method="POST" action="{{ route('photocards.want', $photocard) }}">
+                            @csrf
+                            <button type="submit" class="btn-dark">Add to Want</button>
+                        </form>
+                    </div>
                 </div>
-                <div style="margin-top:12px;">
-                    <button type="submit" class="btn">Add to my collection</button>
-                </div>
-            </form>
+            </div>
+
         @else
             <p><a href="{{ route('login') }}">Log in</a> to add this photocard to your collection.</p>
         @endauth
+
     </div>
 </div>
 
 </x-app-layout>
+ 
