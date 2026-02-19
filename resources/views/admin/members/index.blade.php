@@ -5,6 +5,7 @@
 <table border="1">
 <tr>
     <th>Image</th>
+    <th>Emoji</th>
     <th>Stage Name</th>
     <th>Group</th>
     <th>Actions</th>
@@ -17,6 +18,7 @@
             <img src="{{ asset('storage/'.$member->image) }}" width="80">
         @endif
     </td>
+    <td style="font-size:22px; text-align:center">{{ $member->emoji ?? '' }}</td>
     <td>{{ $member->stage_name }}</td>
     <td>{{ $member->group->name }}</td>
     <td>

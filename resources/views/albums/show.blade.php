@@ -1,8 +1,11 @@
 
 <x-app-layout>
+	<x-slot name="header">
+		<h2 class="large-title">{{ $album->name }}</h2>
+	</x-slot>
 
-<h1 class="large-title">{{ $album->name }}</h1>
-
+   <br>
+   
 <div class="flex-gap">
 	<div>
 		<img src="{{ $album->image ? asset('storage/' . $album->image) : asset('images/album-placeholder.png') }}" alt="{{ $album->name }}" class="img-album img-cover">
@@ -34,6 +37,17 @@
 					<option value="{{ $m->id }}" {{ (isset($memberFilter) && $memberFilter == $m->id) ? 'selected' : '' }}>{{ $m->stage_name ?? $m->name }}</option>
 				@endforeach
 			</select>
+
+			<label class="small-muted" style="margin-right:8px; margin-left:6px">Version:</label>
+			<select name="version" class="dark-select">
+				<option value="">All</option>
+				@if(!empty($versions) && $versions->count())
+					@foreach($versions as $v)
+						<option value="{{ $v }}" {{ (isset($versionFilter) && $versionFilter == $v) ? 'selected' : '' }}>{{ $v }}</option>
+					@endforeach
+				@endif
+			</select>
+
 			<button type="submit" class="btn-dark" style="margin-left:6px">Filter</button>
 		</form>
 

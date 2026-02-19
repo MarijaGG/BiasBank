@@ -51,6 +51,16 @@
                value="{{ old('birthday', $member->birthday) }}">
     </div>
 
+    <div>
+        <label>Nationality:</label>
+        <input type="text" name="nationality" maxlength="100" value="{{ old('nationality', $member->nationality) }}">
+    </div>
+
+    <div>
+        <label>Emoji (representative):</label>
+        <input type="text" name="emoji" maxlength="10" value="{{ old('emoji', $member->emoji) }}">
+    </div>
+
     @if ($member->image)
         <div>
             <p>Current Image:</p>

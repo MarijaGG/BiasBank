@@ -22,6 +22,8 @@ protected $fillable = [
     'real_name',
     'birthday',
     'image',
+    'emoji',
+    'nationality',
 ];
 
 

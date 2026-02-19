@@ -1,7 +1,10 @@
 <x-app-layout>
 
+    <x-slot name="header">
+        <h2 class="large-title">{{ $group->name }}</h2>
+    </x-slot>
+
 <div class="card">
-    <h1 class="large-title">{{ $group->name }}</h1>
 
     <p><strong>Debut date:</strong> {{ $group->debut_date }}</p>
     <p><strong>Members:</strong> {{ $group->members->count() }}</p>

@@ -11,13 +11,18 @@ class PublicMemberController extends Controller
         $member->load(['group', 'photocards']);
 
         $ownedCounts = [];
+        $wanted = [];
         if (auth()->check()) {
             $userPhotocards = auth()->user()->userPhotocards()->whereIn('photocard_id', $member->photocards->pluck('id'))->get();
             foreach ($userPhotocards as $up) {
-                $ownedCounts[$up->photocard_id] = ($ownedCounts[$up->photocard_id] ?? 0) + 1;
+                if (($up->status ?? 'have') === 'have') {
+                    $ownedCounts[$up->photocard_id] = ($ownedCounts[$up->photocard_id] ?? 0) + 1;
+                } elseif ($up->status === 'want') {
+                    $wanted[$up->photocard_id] = true;
+                }
             }
         }
 
-        return view('members.show', compact('member', 'ownedCounts'));
+        return view('members.show', compact('member', 'ownedCounts', 'wanted'));
     }
 }

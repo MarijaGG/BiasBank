@@ -27,8 +27,20 @@
 
     <br>
 
+    <label>Emoji (representative):</label>
+    <input type="text" name="emoji" maxlength="10" placeholder="e.g. 🎤">
+
+    <br>
+
+    <label>Nationality:</label>
+    <input type="text" name="nationality" maxlength="100" placeholder="e.g. South Korea">
+
+    <br>
+
     <label>Image:</label>
     <input type="file" name="image">
+
+
 
     <br><br>
 

@@ -39,4 +39,15 @@ class GroupListController extends Controller
         return view('groups.show', compact('group'));
     }
 
+    public function members(Group $group)
+    {
+        $members = $group->members()->orderBy('stage_name')->get(['id', 'stage_name', 'name']);
+
+        $result = $members->map(function ($m) {
+            return ['id' => $m->id, 'name' => $m->stage_name ?? $m->name];
+        });
+
+        return response()->json($result);
+    }
+
 }

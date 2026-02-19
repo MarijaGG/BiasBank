@@ -32,7 +32,17 @@ Route::get('/dashboard', function () {
         });
     }
 
-    return view('dashboard', compact('collection', 'collectionTotal'));
+    $recentAlbums = \App\Models\Album::where('release_date', '<=', now())
+        ->orderBy('release_date', 'desc')
+        ->take(5)
+        ->get();
+
+    $recentPhotocards = \App\Models\Photocard::with(['member', 'album'])
+        ->orderBy('created_at', 'desc')
+        ->take(6)
+        ->get();
+
+    return view('dashboard', compact('collection', 'collectionTotal', 'recentAlbums', 'recentPhotocards'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -46,6 +56,7 @@ require __DIR__.'/auth.php';
 
 Route::get('/groups', [GroupListController::class, 'index'])->name('groups.index');
 Route::get('/groups/{group}', [GroupListController::class, 'show'])->name('groups.show');
+Route::get('/groups/{group}/members', [GroupListController::class, 'members'])->name('groups.members');
 Route::get('/albums', [PublicAlbumController::class, 'index'])->name('albums.index');
 Route::get('/albums/upcoming', [PublicAlbumController::class, 'upcoming'])->name('albums.upcoming');
 Route::get('/albums/{album}', [PublicAlbumController::class, 'show'])->name('albums.show');
@@ -57,6 +68,7 @@ Route::post('/photocards/{photocard}/want', [PublicPhotocardController::class, '
 Route::middleware('auth')->group(function () {
     Route::get('/collection', [\App\Http\Controllers\CollectionController::class, 'index'])->name('collection.index');
     Route::delete('/collection/{userPhotocard}', [\App\Http\Controllers\CollectionController::class, 'destroy'])->name('collection.destroy');
+    Route::patch('/collection/{userPhotocard}', [\App\Http\Controllers\CollectionController::class, 'update'])->name('collection.update');
 });
 
 

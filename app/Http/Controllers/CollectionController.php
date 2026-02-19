@@ -19,7 +19,6 @@ class CollectionController extends Controller
         $sort = $request->get('sort', 'created_at');
         $direction = $request->get('direction', 'desc');
 
-        // Helper to fetch items by status and apply filters/sorting
         $fetchItems = function ($status) use ($user, $groupFilter, $memberFilter, $sort, $direction) {
             $q = $user->userPhotocards()->with(['photocard.member', 'photocard.album'])->where('status', $status);
 
@@ -37,7 +36,6 @@ class CollectionController extends Controller
 
             $items = $q->get();
 
-            // Collection-based sorting for member/album/price
             if ($sort === 'member') {
                 $items = $items->sortBy(function ($up) {
                     return $up->photocard->member->stage_name ?? $up->photocard->member->name ?? '';
@@ -51,7 +49,6 @@ class CollectionController extends Controller
                     return $up->purchase_price ?? ($up->photocard->average_price ?? 0);
                 }, SORT_REGULAR, $direction === 'desc')->values();
             } else {
-                // default: sort by created_at on the pivot
                 $items = $items->sortBy('created_at', SORT_REGULAR, $direction === 'desc')->values();
             }
 
@@ -61,15 +58,20 @@ class CollectionController extends Controller
         $haveItems = $fetchItems('have');
         $wantItems = $fetchItems('want');
 
-        $groups = Group::orderBy('name')->get();
-        // If a group filter is set, only return members for that group
+        $allHaveItems = $user->userPhotocards()->with('photocard')->where('status', 'have')->get();
+        $collectionTotal = $allHaveItems->sum(function ($item) {
+            return $item->purchase_price ?? ($item->photocard->average_price ?? 0);
+        });
+
+        $groups = Group::with('members')->orderBy('name')->get();
+     
         $membersQuery = Member::orderBy('stage_name');
         if ($groupFilter) {
             $membersQuery->where('group_id', $groupFilter);
         }
         $members = $membersQuery->get();
 
-        return view('collection.index', compact('haveItems', 'wantItems', 'groups', 'members', 'section', 'sort', 'direction', 'groupFilter', 'memberFilter'));
+        return view('collection.index', compact('haveItems', 'wantItems', 'groups', 'members', 'section', 'sort', 'direction', 'groupFilter', 'memberFilter', 'collectionTotal'));
     }
 
     public function destroy(Request $request, UserPhotocard $userPhotocard)
@@ -83,5 +85,25 @@ class CollectionController extends Controller
         $userPhotocard->delete();
 
         return back()->with('status', 'Removed from your collection.');
+    }
+
+    public function update(Request $request, UserPhotocard $userPhotocard)
+    {
+        $user = $request->user();
+
+        if ($userPhotocard->user_id !== $user->id) {
+            abort(403);
+        }
+
+        $data = $request->validate([
+            'purchase_price' => ['nullable', 'numeric', 'min:0'],
+            'status' => ['required', 'in:have,want'],
+        ]);
+
+        $userPhotocard->purchase_price = $data['purchase_price'] ?? null;
+        $userPhotocard->status = $data['status'];
+        $userPhotocard->save();
+
+        return back()->with('status', 'Updated.');
     }
 }

@@ -19,40 +19,33 @@
             </style>
         @endif
     </head>
-    <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
-        <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
-            @if (Route::has('login'))
-                <nav class="flex items-center justify-end gap-4">
-                    @auth
-                        <a
-                            href="{{ url('/dashboard') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
-                        >
-                            Dashboard
-                        </a>
-                    @else
-                        <a
-                            href="{{ route('login') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
-                        >
-                            Log in
-                        </a>
+    <body class="font-sans antialiased bg-white dark:bg-[#0b1220] text-gray-900 dark:text-white flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
+        <style>
+            .welcome-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:1rem}
+            .biasbank-title{font-family:Instrument Sans,ui-sans-serif,system-ui,sans-serif;font-weight:700;font-size:3.5rem;letter-spacing:.02em}
+            .auth-links{display:flex;gap:0.75rem;margin-top:0.5rem}
+            .auth-links a{padding:0.5rem 0.9rem;border-radius:6px;border:1px solid transparent}
+            .auth-links a.login{background:transparent;color:inherit;border-color:transparent}
+            .auth-links a.register{background:transparent;color:inherit;border-color:transparent}
+            @media (max-width:640px){.biasbank-title{font-size:2rem}}
+        </style>
 
+        <main class="welcome-wrap">
+            <h1 class="biasbank-title">BiasBank</h1>
+            <p class="text-white text-lg opacity-90 mt-1">Collect, track, and cherish your bias photocards.</p>
+
+            @if (Route::has('login'))
+                <div class="auth-links">
+                    @auth
+                        <a href="{{ url('/dashboard') }}" class="login text-sm">Dashboard</a>
+                    @else
+                        <a href="{{ route('login') }}" class="login text-sm">Log in</a>
                         @if (Route::has('register'))
-                            <a
-                                href="{{ route('register') }}"
-                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
-                                Register
-                            </a>
+                            <a href="{{ route('register') }}" class="register text-sm">Register</a>
                         @endif
                     @endauth
-                </nav>
+                </div>
             @endif
-        </header>
-
-
-        @if (Route::has('login'))
-            <div class="h-14.5 hidden lg:block"></div>
-        @endif
+        </main>
     </body>
 </html>

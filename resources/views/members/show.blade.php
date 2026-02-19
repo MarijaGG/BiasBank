@@ -1,5 +1,7 @@
 <x-app-layout>
 
+<a href="{{ route('groups.show', $member->group) }}" class="back-link">← Back to group</a>
+
 <h1 class="large-title">{{ $member->stage_name ?? $member->name }}</h1>
 
 <div class="flex-gap">
@@ -9,12 +11,12 @@
 
     <div>
         <p><strong>Real name:</strong> {{ $member->real_name }}</p>
-        <p><strong>Birthday:</strong> {{ $member->birthday }}</p>
         <p><strong>Group:</strong> <a href="{{ route('groups.show', $member->group) }}">{{ $member->group->name ?? $member->group->display_name ?? 'Group' }}</a></p>
+        <p><strong>Birthday:</strong> {{ $member->birthday }}</p>
+        <p><strong>Nationality:</strong> {{ $member->nationality ?? '—' }}</p>
+        <p><strong>Representative Emoji:</strong> {{ $member->emoji ?? '—' }}</p>
 
-        <div style="margin-top:18px;">
-            <a href="{{ route('groups.show', $member->group) }}" class="btn">Back to group</a>
-        </div>
+    <br>
 
         <h3>Photocards</h3>
         <div class="photocard-grid">
@@ -23,9 +25,11 @@
                     <a href="{{ route('photocards.show', $pc) }}">
                         <img src="{{ $pc->photo ? asset('storage/' . $pc->photo) : asset('images/photocard-placeholder.png') }}" alt="Photocard" class="img-photocard img-cover">
                     </a>
-                    @php $count = $ownedCounts[$pc->id] ?? 0; @endphp
+                    @php $count = $ownedCounts[$pc->id] ?? 0; $wantFlag = $wanted[$pc->id] ?? false; @endphp
                     @if($count > 0)
                         <div class="pc-owned">Owned: {{ $count }}</div>
+                    @elseif($wantFlag)
+                        <div class="small-muted">Want</div>
                     @endif
                 </div>
             @endforeach

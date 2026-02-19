@@ -1,7 +1,11 @@
 <x-app-layout>
+    <x-slot name="header">
+        <h2 class="large-title">Albums</h2>
+    </x-slot>
+    
+    <br>
 
-<h1 class="large-title">Albums</h1>
-
+@if(empty($upcoming))
 <form method="GET" action="{{ route('albums.index') }}" class="flex-gap" style="margin-bottom:16px;align-items:center;">
     <label class="small-muted" style="margin-right:8px">Sort by:</label>
     <select name="sort" class="dark-select">
@@ -27,6 +31,7 @@
 
     <button type="submit" class="btn-dark" style="margin-left:12px">Apply</button>
 </form>
+@endif
 
 <div class="grid-wrap">
     @foreach($albums as $album)

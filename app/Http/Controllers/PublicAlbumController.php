@@ -96,6 +96,7 @@ class PublicAlbumController extends Controller
         $album->load(['group.members', 'photocards.member']);
 
         $memberFilter = $request->get('member');
+        $versionFilter = $request->get('version');
 
         $photocards = $album->photocards;
         if ($memberFilter) {
@@ -104,9 +105,17 @@ class PublicAlbumController extends Controller
             })->values();
         }
 
+        if ($versionFilter) {
+            $photocards = $photocards->filter(function ($pc) use ($versionFilter) {
+                return (string)($pc->version ?? '') === (string)$versionFilter;
+            })->values();
+        }
+
         $members = $album->group->members ?? collect();
 
-        return view('albums.show', compact('album', 'photocards', 'members', 'memberFilter'));
+        $versions = $album->photocards->pluck('version')->filter()->unique()->values();
+
+        return view('albums.show', compact('album', 'photocards', 'members', 'memberFilter', 'versionFilter', 'versions'));
     }
 }
 

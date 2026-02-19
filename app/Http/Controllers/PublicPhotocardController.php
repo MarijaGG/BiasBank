@@ -13,11 +13,13 @@ class PublicPhotocardController extends Controller
         $photocard->load(['member', 'album']);
 
         $ownedCount = 0;
+        $want = false;
         if (auth()->check()) {
-            $ownedCount = auth()->user()->userPhotocards()->where('photocard_id', $photocard->id)->count();
+            $ownedCount = auth()->user()->userPhotocards()->where('photocard_id', $photocard->id)->where('status', 'have')->count();
+            $want = auth()->user()->userPhotocards()->where('photocard_id', $photocard->id)->where('status', 'want')->exists();
         }
 
-        return view('photocards.show', compact('photocard', 'ownedCount'));
+        return view('photocards.show', compact('photocard', 'ownedCount', 'want'));
     }
 
     public function collect(Request $request, Photocard $photocard)
@@ -53,8 +55,7 @@ class PublicPhotocardController extends Controller
     public function want(Request $request, Photocard $photocard)
     {
         $user = $request->user();
-
-        // avoid duplicate wants/haves
+        
         $exists = UserPhotocard::where('user_id', $user->id)
             ->where('photocard_id', $photocard->id)
             ->exists();

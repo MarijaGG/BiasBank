@@ -7,27 +7,61 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="card overflow-hidden sm:rounded-lg">
+    
+            <div class="card overflow-hidden sm:rounded-lg mb-6">
                 <div class="p-6">
-                    {{ __("You're logged in!") }}
+                    <h3 class="text-xl font-semibold"><a href="{{ route('collection.index') }}" class="link">Go to your collection →</a></h3>
+                </div>
+            </div>
 
-                    @if(!empty($collection) && $collection->count())
-                        <div class="small-muted">Total collection value: ${{ number_format($collectionTotal, 2) }}</div>
+            <div class="card overflow-hidden sm:rounded-lg mb-6">
+                <div class="p-6 dashboard-albums no-hover">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold">Recent albums</h3>
+                        </div>
+                        <a href="{{ route('albums.index') }}" class="link">View all albums →</a>
+                    </div>
 
-                        <h3 class="mt-4 font-semibold">Your collection</h3>
-                        <div class="collection-grid" style="margin-top:8px;">
-                            @foreach($collection as $item)
+                    @if(!empty($recentAlbums) && $recentAlbums->count())
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mt-4">
+                            @foreach($recentAlbums as $album)
                                 <div class="collection-item">
-                                    <a href="{{ route('photocards.show', $item->photocard) }}">
-                                        <img src="{{ $item->photocard->photo ? asset('storage/' . $item->photocard->photo) : asset('images/photocard-placeholder.png') }}" alt="pc" class="img-photocard img-cover">
+                                    <a href="{{ route('albums.show', $album) }}">
+                                        <img src="{{ $album->image ? asset('storage/' . $album->image) : asset('images/album-placeholder.png') }}" alt="album" class="img-album img-cover">
                                     </a>
-                                    <div class="album-title">{{ $item->photocard->member->stage_name ?? $item->photocard->member->name }}</div>
-                                    <div class="small-muted">{{ $item->condition }}</div>
+                                    <div class="album-title mt-2">{{ $album->name }}</div>
+                                    <div class="small-muted">{{ $album->release_date ? \Carbon\Carbon::parse($album->release_date)->toFormattedDateString() : '' }}</div>
                                 </div>
                             @endforeach
                         </div>
                     @else
-                        <p class="mt-4">You have no photocards in your collection yet.</p>
+                        <p class="mt-4">No recent albums yet.</p>
+                    @endif
+                </div>
+            </div>
+
+            <div class="card overflow-hidden sm:rounded-lg">
+                <div class="p-6 dashboard-photocards no-hover">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xl font-semibold">Recently added photocards</h3>
+                        <a href="{{ route('photocards.show', isset($recentPhotocards[0]) ? $recentPhotocards[0] : '#') }}" style="visibility:hidden">placeholder</a>
+                    </div>
+
+                    @if(!empty($recentPhotocards) && $recentPhotocards->count())
+                        <div class="collection-grid mt-4" style="margin-top:8px;">
+                            @foreach($recentPhotocards as $pc)
+                                <div class="collection-item">
+                                    <a href="{{ route('photocards.show', $pc) }}">
+                                        <img src="{{ $pc->photo ? asset('storage/' . $pc->photo) : asset('images/photocard-placeholder.png') }}" class="img-photocard img-cover">
+                                    </a>
+                                    <div class="album-title">{{ $pc->member->stage_name ?? $pc->member->name }}</div>
+                                    <div class="small-muted">{{ $pc->album->name ?? '' }}</div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @else
+                        <p class="mt-4">No recently added photocards.</p>
                     @endif
                 </div>
             </div>

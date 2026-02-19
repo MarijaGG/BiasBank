@@ -1,6 +1,9 @@
 <x-app-layout>
+    <x-slot name="header">
+        <h2 class="large-title">Groups</h2>
+    </x-slot>
 
-<h1 class="large-title">Groups</h1>
+    <br>
 
 <form method="GET" action="{{ route('groups.index') }}" class="flex-gap" style="margin-bottom:20px;align-items:center;">
 
@@ -16,7 +19,7 @@
         <option value="desc" {{ request('direction') == 'desc' ? 'selected' : '' }}>Desc</option>
     </select>
 
-    <button type="submit" class="btn-dark" style="margin-left:12px">Sort</button>
+    <button type="submit" class="btn-dark" style="margin-left:12px">Apply</button>
 </form>
 
 <div class="groups-grid">

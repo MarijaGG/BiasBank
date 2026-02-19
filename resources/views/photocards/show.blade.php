@@ -6,6 +6,8 @@
     <div>
         @if(isset($ownedCount) && $ownedCount > 0)
             <div class="small-muted" style="margin-bottom:8px;font-weight:600;">You have {{ $ownedCount }} of this photocard in your collection.</div>
+        @elseif(isset($want) && $want)
+            <div class="small-muted" style="margin-bottom:8px;font-weight:600;">You want this photocard.</div>
         @endif
         <img src="{{ $photocard->photo ? asset('storage/' . $photocard->photo) : asset('images/photocard-placeholder.png') }}" alt="Photocard" class="img-photocard img-cover" style="width:220px;height:300px;">
     </div>
@@ -14,7 +16,7 @@
         <p><strong>Member:</strong> <a href="{{ route('members.show', $photocard->member) }}">{{ $photocard->member->stage_name ?? $photocard->member->name }}</a></p>
         <p><strong>Album:</strong> <a href="{{ route('albums.show', $photocard->album) }}">{{ $photocard->album->name ?? 'Album' }}</a></p>
         <p><strong>Version:</strong> {{ $photocard->version ?? '—' }}</p>
-        <p><strong>Average price:</strong> {{ $photocard->average_price ?? '—' }}</p>
+        <p><strong>Average price:</strong> {{ $photocard->average_price ?? '—' }} USD</p>
 
         @auth
             <hr class="sep">
