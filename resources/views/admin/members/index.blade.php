@@ -15,7 +15,7 @@
 <tr>
     <td>
         @if($member->image)
-            <img src="{{ asset('storage/'.$member->image) }}" width="80">
+            <img src="{{ $member->image_url }}" width="80">
         @endif
     </td>
     <td style="font-size:22px; text-align:center">{{ $member->emoji ?? '' }}</td>

@@ -50,7 +50,7 @@
     @else
         @foreach($haveItems as $up)
             <div class="card" style="width:180px;text-align:center;">
-                <img src="{{ $up->photocard->photo ? asset('storage/' . $up->photocard->photo) : asset('images/photocard-placeholder.png') }}" class="img-photocard img-cover" style="width:120px;height:156px;" alt="pc">
+                <img src="{{ $up->photocard->photo_url }}" class="img-photocard img-cover" style="width:120px;height:156px;" alt="pc">
                 <div style="margin-top:8px;font-weight:700;">{{ $up->photocard->member->stage_name ?? $up->photocard->member->name }}</div>
                 <div class="small-muted">{{ $up->photocard->album->name ?? '' }}</div>
 
@@ -95,7 +95,7 @@
     @else
         @foreach($wantItems as $up)
             <div class="card" style="width:180px;text-align:center;">
-                <img src="{{ $up->photocard->photo ? asset('storage/' . $up->photocard->photo) : asset('images/photocard-placeholder.png') }}" class="img-photocard img-cover" style="width:120px;height:156px;" alt="pc">
+                <img src="{{ $up->photocard->photo_url }}" class="img-photocard img-cover" style="width:120px;height:156px;" alt="pc">
                 <div style="margin-top:8px;font-weight:700;">{{ $up->photocard->member->stage_name ?? $up->photocard->member->name }}</div>
                 <div class="small-muted">{{ $up->photocard->album->name ?? '' }}</div>
 

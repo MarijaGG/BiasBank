@@ -20,7 +20,7 @@
 <tr>
     <td>
         @if($album->image)
-            <img src="{{ asset('storage/'.$album->image) }}" width="80">
+            <img src="{{ $album->image_url }}" width="80">
         @endif
     </td>
     <td>{{ $album->name }}</td>

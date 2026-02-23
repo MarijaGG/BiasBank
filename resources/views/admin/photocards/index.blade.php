@@ -16,7 +16,7 @@
     @foreach($photocards as $card)
         <tr>
             <td>
-                <img src="{{ asset('storage/'.$card->photo) }}" width="80">
+                <img src="{{ $card->photo_url }}" width="80">
             </td>
             <td>{{ $card->member->group->name }}</td>
             <td>{{ $card->member->stage_name }}</td>

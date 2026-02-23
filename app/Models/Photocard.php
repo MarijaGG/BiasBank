@@ -14,6 +14,19 @@ class Photocard extends Model
         'photo',
     ];
 
+    public function getPhotoUrlAttribute()
+    {
+        if (empty($this->photo)) {
+            return asset('images/photocard-placeholder.png');
+        }
+
+        if (str_starts_with($this->photo, 'images/')) {
+            return asset($this->photo);
+        }
+
+        return asset('storage/' . $this->photo);
+    }
+
     public function member()
     {
         return $this->belongsTo(Member::class);

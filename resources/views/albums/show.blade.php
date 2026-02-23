@@ -8,7 +8,7 @@
    
 <div class="flex-gap">
 	<div>
-		<img src="{{ $album->image ? asset('storage/' . $album->image) : asset('images/album-placeholder.png') }}" alt="{{ $album->name }}" class="img-album img-cover">
+		<img src="{{ $album->image_url }}" alt="{{ $album->name }}" class="img-album img-cover">
 	</div>
 
 	<div>
@@ -56,7 +56,7 @@
 				@foreach($pcs as $pc)
 					<div class="photocard-item center">
 						<a href="{{ route('photocards.show', $pc) }}">
-							<img src="{{ $pc->photo ? asset('storage/' . $pc->photo) : asset('images/photocard-placeholder.png') }}" alt="Photocard" class="img-photocard img-cover">
+							<img src="{{ $pc->photo_url }}" alt="Photocard" class="img-photocard img-cover">
 							<div class="album-title">{{ $pc->version ?? '—' }}</div>
 						</a>
 					</div>

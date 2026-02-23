@@ -17,7 +17,7 @@
         @foreach($group->members as $member)
             <div class="member-card">
                 <a href="{{ route('members.show', $member) }}">
-                    <img src="{{ $member->image ? asset('storage/' . $member->image) : asset('images/member-placeholder.png') }}" alt="{{ $member->stage_name ?? $member->name ?? 'Member' }}" class="img-member img-cover">
+                    <img src="{{ $member->image_url }}" alt="{{ $member->stage_name ?? $member->name ?? 'Member' }}" class="img-member img-cover">
                 </a>
                 <div class="member-name">{{ $member->stage_name ?? $member->name }}</div>
             </div>
@@ -32,7 +32,7 @@
         @foreach($group->albums as $album)
             <div class="center album-card">
                 <a href="{{ route('albums.show', $album) }}">
-                    <img src="{{ $album->image ? asset('storage/' . $album->image) : asset('images/album-placeholder.png') }}" alt="{{ $album->name }}" class="img-album img-cover">
+                    <img src="{{ $album->image_url }}" alt="{{ $album->name }}" class="img-album img-cover">
                     <div class="album-title">{{ $album->name }}</div>
                 </a>
             </div>

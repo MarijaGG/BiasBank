@@ -6,7 +6,7 @@
 
 <div class="flex-gap">
     <div>
-        <img src="{{ $member->image ? asset('storage/' . $member->image) : asset('images/member-placeholder.png') }}" alt="{{ $member->stage_name }}" class="img-member img-member-large img-cover">
+        <img src="{{ $member->image_url }}" alt="{{ $member->stage_name }}" class="img-member img-member-large img-cover">
     </div>
 
     <div>
@@ -23,7 +23,7 @@
             @foreach($member->photocards as $pc)
                 <div class="photocard-item center" style="position:relative;">
                     <a href="{{ route('photocards.show', $pc) }}">
-                        <img src="{{ $pc->photo ? asset('storage/' . $pc->photo) : asset('images/photocard-placeholder.png') }}" alt="Photocard" class="img-photocard img-cover">
+                        <img src="{{ $pc->photo_url }}" alt="Photocard" class="img-photocard img-cover">
                     </a>
                     @php $count = $ownedCounts[$pc->id] ?? 0; $wantFlag = $wanted[$pc->id] ?? false; @endphp
                     @if($count > 0)

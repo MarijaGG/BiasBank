@@ -9,7 +9,7 @@
         @elseif(isset($want) && $want)
             <div class="small-muted" style="margin-bottom:8px;font-weight:600;">You want this photocard.</div>
         @endif
-        <img src="{{ $photocard->photo ? asset('storage/' . $photocard->photo) : asset('images/photocard-placeholder.png') }}" alt="Photocard" class="img-photocard img-cover" style="width:220px;height:300px;">
+        <img src="{{ $photocard->photo_url }}" alt="Photocard" class="img-photocard img-cover" style="width:220px;height:300px;">
     </div>
 
     <div>

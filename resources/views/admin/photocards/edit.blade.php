@@ -42,7 +42,7 @@
 
 
     <p>Current Photo:</p>
-    <img src="{{ asset('storage/' . $photocard->photo) }}" width="100">
+    <img src="{{ $photocard->photo_url }}" width="100">
 
     <label>Change Photo:</label>
     <input type="file" name="photo">

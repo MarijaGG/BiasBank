@@ -42,7 +42,7 @@
     @if($album->image)
         <div>
             <p>Current Cover:</p>
-            <img src="{{ asset('storage/'.$album->image) }}" width="120">
+            <img src="{{ $album->image_url }}" width="120">
         </div>
     @endif
 

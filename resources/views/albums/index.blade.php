@@ -37,7 +37,7 @@
     @foreach($albums as $album)
         <div class="center" style="width:160px;">
             <a href="{{ route('albums.show', $album) }}">
-                <img src="{{ $album->image ? asset('storage/' . $album->image) : asset('images/album-placeholder.png') }}" alt="{{ $album->name }}" class="img-album img-cover">
+                <img src="{{ $album->image_url }}" alt="{{ $album->name }}" class="img-album img-cover">
                 <div class="album-title">{{ $album->name }}</div>
             </a>
         </div>

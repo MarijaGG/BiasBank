@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Member extends Model
 {
@@ -25,6 +26,19 @@ protected $fillable = [
     'emoji',
     'nationality',
 ];
+
+    public function getImageUrlAttribute()
+    {
+        if (empty($this->image)) {
+            return asset('images/member-placeholder.png');
+        }
+
+        if (Str::startsWith($this->image, 'images/')) {
+            return asset($this->image);
+        }
+
+        return asset('storage/' . $this->image);
+    }
 
 
 }

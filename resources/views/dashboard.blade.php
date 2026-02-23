@@ -28,7 +28,7 @@
                             @foreach($recentAlbums as $album)
                                 <div class="collection-item">
                                     <a href="{{ route('albums.show', $album) }}">
-                                        <img src="{{ $album->image ? asset('storage/' . $album->image) : asset('images/album-placeholder.png') }}" alt="album" class="img-album img-cover">
+                                        <img src="{{ $album->image_url }}" alt="album" class="img-album img-cover">
                                     </a>
                                     <div class="album-title mt-2">{{ $album->name }}</div>
                                     <div class="small-muted">{{ $album->release_date ? \Carbon\Carbon::parse($album->release_date)->toFormattedDateString() : '' }}</div>
@@ -53,7 +53,7 @@
                             @foreach($recentPhotocards as $pc)
                                 <div class="collection-item">
                                     <a href="{{ route('photocards.show', $pc) }}">
-                                        <img src="{{ $pc->photo ? asset('storage/' . $pc->photo) : asset('images/photocard-placeholder.png') }}" class="img-photocard img-cover">
+                                        <img src="{{ $pc->photo_url }}" class="img-photocard img-cover">
                                     </a>
                                     <div class="album-title">{{ $pc->member->stage_name ?? $pc->member->name }}</div>
                                     <div class="small-muted">{{ $pc->album->name ?? '' }}</div>

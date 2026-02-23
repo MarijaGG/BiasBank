@@ -64,7 +64,7 @@
     @if ($member->image)
         <div>
             <p>Current Image:</p>
-            <img src="{{ asset('storage/'.$member->image) }}" width="120">
+            <img src="{{ $member->image_url }}" width="120">
         </div>
     @endif
 

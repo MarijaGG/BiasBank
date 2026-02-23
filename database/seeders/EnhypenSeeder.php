@@ -16,7 +16,7 @@ class EnhypenSeeder extends Seeder
         // Group
         $group = Group::create([
             'name' => 'Enhypen',
-            'debut_date' => null,
+            'debut_date' => Carbon::createFromFormat('d/m/Y', '30/11/2020')->toDateString(),
         ]);
 
         // Albums
@@ -38,7 +38,7 @@ class EnhypenSeeder extends Seeder
             'image' => 'images/albums/enha_album_2.jpg',
         ]);
 
-        // Members (numbered 1..7)
+        // Members
         $members = [];
 
         $members[1] = Member::create([
